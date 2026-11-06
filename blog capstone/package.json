@@ -1,0 +1,14 @@
+{
+  "name": "blog-capstone",
+  "version": "1.0.0",
+  "description": "A simple blog web application built with Node, Express, and EJS.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.19.2",
+    "method-override": "^3.0.0"
+  }
+}

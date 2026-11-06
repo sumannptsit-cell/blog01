@@ -1,0 +1,30 @@
+<%- include('partials/header') %>
+
+<div class="form-container">
+    <h2>Create a New Post</h2>
+    <p class="form-sub">Fill out the fields below to publish a new article to the feed.</p>
+    
+    <form action="/posts" method="POST" class="blog-form">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" placeholder="Give your story a title..." required autofocus>
+        </div>
+        
+        <div class="form-group">
+            <label for="author">Author</label>
+            <input type="text" id="author" name="author" placeholder="Your Name">
+        </div>
+        
+        <div class="form-group">
+            <label for="content">Content</label>
+            <textarea id="content" name="content" rows="12" placeholder="Start writing here..." required></textarea>
+        </div>
+        
+        <div class="form-actions">
+            <a href="/" class="btn btn-outline">Cancel</a>
+            <button type="submit" class="btn btn-primary">Publish Post</button>
+        </div>
+    </form>
+</div>
+
+<%- include('partials/footer') %>
