@@ -42,8 +42,7 @@ node index.js
 http://localhost:3000
 
 ## Screenshot
-
-
+![Blog Screenshot](./screenshot/Screenshot%202026-11-11%20114045.png)
 
 ## Author
 
