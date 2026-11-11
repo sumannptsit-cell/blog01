@@ -66,6 +66,30 @@ body {
   transition: color 0.2s ease;
 }
 
+/* Write a Post button */
+.nav-links a.btn-primary {
+  background-color: white;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
+
+.nav-links a.btn-primary:hover {
+  background-color: var(--primary);
+  color: white;
+}
+
+/* Write a Post button */
+.nav-links a.btn-primary {
+  background-color: white;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
+
+.nav-links a.btn-primary:hover {
+  background-color: var(--primary);
+  color: white;
+}
+
 .nav-links a:hover {
   color: var(--primary);
 }

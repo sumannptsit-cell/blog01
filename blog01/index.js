@@ -32,36 +32,6 @@ app.get("/", (req, res) => {
   res.render("index", { posts });
 });
 
-// 2. GET CREATE POST FORM
-app.get("/posts/new", (req, res) => {
-  res.render("create");
-});
-
-// 3. CREATE NEW POST (Action)
-app.post("/posts", (req, res) => {
-  const { title, content, author } = req.body;
-
-  // Validate title and content
-  if (
-    typeof title !== "string" ||
-    typeof content !== "string" ||
-    title.trim() === "" ||
-    content.trim() === ""
-  ) {
-    return res.status(400).send("Title and content are required.");
-  }
-
-  const newPost = {
-    id: Date.now().toString(),
-    title: title.trim(),
-    content: content.trim(),
-    author: author || "suman grg",
-    date: new Date().toLocaleDateString()
-  };
-
-  posts.push(newPost);
-  res.redirect("/");
-});
 
 // 4. GET A SPECIFIC POST
 app.get("/posts/:id", (req, res) => {
@@ -77,36 +47,6 @@ app.get("/posts/:id/edit", (req, res) => {
   res.render("edit", { post });
 });
 
-// 6. UPDATE POST (Action)
-app.put("/posts/:id", (req, res) => {
-  const { title, content, author } = req.body;
-
-  // Validate title and content BEFORE updating
-  if (
-    typeof title !== "string" ||
-    typeof content !== "string" ||
-    title.trim() === "" ||
-    content.trim() === ""
-  ) {
-    return res.status(400).send("Title and content are required.");
-  }
-
-  const postIndex = posts.findIndex(p => p.id === req.params.id);
-
-  if (postIndex === -1) {
-    return res.status(404).send("Post not found");
-  }
-
-  posts[postIndex] = {
-    ...posts[postIndex],
-    title: title.trim(),
-    content: content.trim(),
-    author: author || "suman grg",
-    lastEdited: new Date().toLocaleDateString()
-  };
-
-  res.redirect(`/posts/${req.params.id}`);
-});
 
 // 7. DELETE POST (Action)
 app.delete("/posts/:id", (req, res) => {
