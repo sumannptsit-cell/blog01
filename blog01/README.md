@@ -39,7 +39,7 @@ node index.js
 
 5. Open your browser:
 
-http://localhost:3000
+http://localhost:5000
 
 ## Screenshot
 ![Blog Screenshot](./screenshot/Screenshot%202026-11-11%20114045.png)
