@@ -3,23 +3,6 @@ const methodOverride = require("method-override");
 const app = express();
 const PORT = 3000;
 
-// In-memory post list (will reset if the server restarts)
-let posts = [
-  {
-    id: "1",
-    title: "Getting Started with Node.js & Express",
-    content: "Node.js is a powerful JavaScript runtime built on Chrome's V8 engine, while Express is the gold standard for routing and handling servers inside the Node ecosystem. Together, they make rapid prototyping and building web servers incredibly straightforward.",
-    author: "Alex Developer",
-    date: new Date().toLocaleDateString()
-  },
-  {
-    id: "2",
-    title: "Why EJS is Great for Templating",
-    content: "Embedded JavaScript (EJS) allows you to use standard JavaScript syntax to generate dynamic HTML. EJS makes injecting dynamic lists, toggling views, and reusing partial headers or footers effortless.",
-    author: "Morgan S.",
-    date: new Date().toLocaleDateString()
-  }
-];
 
 // Configuration
 app.set("view engine", "ejs");
