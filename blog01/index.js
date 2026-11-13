@@ -1,4 +1,3 @@
-
 import express from "express";
 import methodOverride from "method-override";
 
@@ -29,7 +28,7 @@ app.get("/", (req, res) => {
   res.render("index", { posts });
 });
 
-// 2.New Post Page
+// 2. New Post Page (Must stay BEFORE /posts/:id)
 app.get("/posts/new", (req, res) => {
   res.render("create.ejs");
 });
@@ -38,7 +37,6 @@ app.get("/posts/new", (req, res) => {
 app.post("/posts", (req, res) => {
   const { title, content, author } = req.body;
 
-  // Validate title and content
   if (
     typeof title !== "string" ||
     typeof content !== "string" ||
@@ -52,12 +50,24 @@ app.post("/posts", (req, res) => {
     id: Date.now().toString(),
     title: title.trim(),
     content: content.trim(),
-    author: author?.trim() || "Anonymous",
+    // FIX #4: Node 12 compatible author check
+    author: author && author.trim() ? author.trim() : "Anonymous",
     date: new Date().toLocaleDateString()
   };
 
   posts.push(newPost);
   res.redirect("/");
+});
+
+// FIX #2: Restored Single Post Page route
+app.get("/posts/:id", (req, res) => {
+  const post = posts.find((p) => p.id === req.params.id);
+
+  if (!post) {
+    return res.status(404).send("Post not found");
+  }
+
+  res.render("post.ejs", { post });
 });
 
 // 4. Edit Post Page
@@ -71,8 +81,8 @@ app.get("/posts/:id/edit", (req, res) => {
   res.render("edit.ejs", { post });
 });
 
-// 5. Update a post
-app.patch("/posts/:id", (req, res) => {
+// FIX #1: Changed app.patch to app.put to match ?_method=PUT
+app.put("/posts/:id", (req, res) => {
   const { title, content, author } = req.body;
 
   if (
@@ -92,10 +102,11 @@ app.patch("/posts/:id", (req, res) => {
 
   post.title = title.trim();
   post.content = content.trim();
-  post.author = author?.trim() || "Anonymous";
+  // FIX #4: Node 12 compatible author check
+  post.author = author && author.trim() ? author.trim() : "Anonymous";
   post.lastEdited = new Date().toLocaleDateString();
 
-  res.redirect("/");
+  res.redirect(`/posts/${post.id}`);
 });
 
 // 6. Delete a post
